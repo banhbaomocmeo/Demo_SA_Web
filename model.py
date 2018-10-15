@@ -18,6 +18,7 @@ class Classifier():
         self.label = ['male', 'female']
         self.name = name
         self.graph = self.load_graph(loc)
+        self.graph.as_default()
         config = tf.ConfigProto(allow_soft_placement = True)
         config.gpu_options.allow_growth = True
         self.sess = tf.Session(graph=self.graph, config=config)
@@ -33,7 +34,7 @@ def get_data(s):
     ids = s.split(',')
     data = []
     for id in ids:
-        path = './faces/parent-{}.jpg'.format(id)
+        path = './static/images/parent-{}.jpg'.format(id)
         data.append(cv2.imread(path, 0))
 
     data = np.array(data).reshape(-1,96,96,1)/255
